@@ -7,7 +7,7 @@ export const esRoleValido = async (rol = " ") => {
   }
 };
 
-export const emailExiste = async (correo = 0) => {
+export const emailExiste = async (correo = "") => {
   //Verificar si el correo existe
   const existEmail = await Usuario.findOne({
     correo,
@@ -15,5 +15,18 @@ export const emailExiste = async (correo = 0) => {
 
   if (existEmail) {
     throw new Error(`El correo ${correo} ya esta registrado`);
+  }
+};
+
+export const existeUsuarioPorId = async (id = "") => {
+  //Verificar si el id existe
+  // const existeUsuario = await Usuario.findOne({
+  //   _id: id,
+  // });
+
+  const usuario = await Usuario.findByIdAndUpdate(id, { estado: false });
+
+  if (!existeUsuario) {
+    throw new Error(`El id no existe: ${id} `);
   }
 };
