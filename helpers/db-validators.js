@@ -20,11 +20,9 @@ export const emailExiste = async (correo = "") => {
 
 export const existeUsuarioPorId = async (id = "") => {
   //Verificar si el id existe
-  // const existeUsuario = await Usuario.findOne({
-  //   _id: id,
-  // });
-
-  const usuario = await Usuario.findByIdAndUpdate(id, { estado: false });
+  const existeUsuario = await Usuario.findOne({
+    _id: id,
+  });
 
   if (!existeUsuario) {
     throw new Error(`El id no existe: ${id} `);
