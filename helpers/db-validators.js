@@ -1,3 +1,4 @@
+import { Category } from "../models/category.js";
 import { Role } from "../models/role.js";
 import { Usuario } from "../models/usuario.js";
 export const esRoleValido = async (rol = " ") => {
@@ -25,6 +26,19 @@ export const existeUsuarioPorId = async (id = "") => {
   });
 
   if (!existeUsuario) {
+    throw new Error(`El id no existe: ${id} `);
+  }
+};
+
+//Validador de categorias
+
+export const existeCategoriaPorId = async (id = "") => {
+  //Verificar si el id existe
+  const existeCategoria = await Category.findOne({
+    _id: id,
+  });
+
+  if (!existeCategoria) {
     throw new Error(`El id no existe: ${id} `);
   }
 };
