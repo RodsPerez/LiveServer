@@ -26,5 +26,5 @@ CategoriesSchema.methods.toJSON = function () {
   return data;
 };
 
-const Category = model("category", CategoriesSchema);
+const Category = model("Category", CategoriesSchema);
 export { Category };

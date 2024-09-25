@@ -5,6 +5,8 @@ import { router } from "../routes/user.js";
 import { dbConnection } from "../db/config.js";
 import { routerAuth } from "../routes/auth.js";
 import { routerCategory } from "../routes/categories.js";
+import { routerProduct } from "../routes/productos.js";
+import { routerSearch } from "../routes/buscar.js";
 
 export class Server {
   constructor() {
@@ -13,7 +15,9 @@ export class Server {
 
     this.paths = {
       auth: "/api/auth",
+      buscar: "/api/buscar",
       categorias: "/api/categories",
+      productos: "/api/productos",
       usuarios: "/api/usuarios",
     };
 
@@ -45,6 +49,8 @@ export class Server {
   routes() {
     this.app.use(this.paths.auth, routerAuth);
     this.app.use(this.paths.categorias, routerCategory);
+    this.app.use(this.paths.buscar, routerSearch);
+    this.app.use(this.paths.productos, routerProduct);
     this.app.use(this.paths.usuarios, router);
   }
 

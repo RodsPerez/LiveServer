@@ -1,6 +1,8 @@
 import { Category } from "../models/category.js";
+import { Product } from "../models/producto.js";
 import { Role } from "../models/role.js";
 import { Usuario } from "../models/usuario.js";
+
 export const esRoleValido = async (rol = " ") => {
   const existRol = await Role.findOne({ rol });
   if (!existRol) {
@@ -39,6 +41,19 @@ export const existeCategoriaPorId = async (id = "") => {
   });
 
   if (!existeCategoria) {
+    throw new Error(`El id no existe: ${id} `);
+  }
+};
+
+//Validar de productos
+
+export const existeProductoPorId = async (id = "") => {
+  //Verificar si el id existe
+  const existeProducto = await Product.findOne({
+    _id: id,
+  });
+
+  if (!existeProducto) {
     throw new Error(`El id no existe: ${id} `);
   }
 };
