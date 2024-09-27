@@ -7,6 +7,10 @@ import { routerAuth } from "../routes/auth.js";
 import { routerCategory } from "../routes/categories.js";
 import { routerProduct } from "../routes/productos.js";
 import { routerSearch } from "../routes/buscar.js";
+import { routerUpload } from "../routes/upload.js";
+
+import pkg from "express-fileupload";
+const { fileUpload } = pkg;
 
 export class Server {
   constructor() {
@@ -19,6 +23,7 @@ export class Server {
       categorias: "/api/categories",
       productos: "/api/productos",
       usuarios: "/api/usuarios",
+      uploads: "/api/uploads",
     };
 
     //Conectar a base de datos
@@ -44,6 +49,16 @@ export class Server {
 
     //Directorio publico
     this.app.use(express.static("public"));
+
+    //Carga de archivos
+
+    this.app.use(
+      pkg({
+        useTempFiles: true,
+        tempFileDir: "/tmp/",
+        createParentPath: true,
+      })
+    );
   }
 
   routes() {
@@ -52,6 +67,7 @@ export class Server {
     this.app.use(this.paths.buscar, routerSearch);
     this.app.use(this.paths.productos, routerProduct);
     this.app.use(this.paths.usuarios, router);
+    this.app.use(this.paths.uploads, routerUpload);
   }
 
   listen() {

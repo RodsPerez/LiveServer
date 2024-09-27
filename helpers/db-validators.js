@@ -57,3 +57,17 @@ export const existeProductoPorId = async (id = "") => {
     throw new Error(`El id no existe: ${id} `);
   }
 };
+
+//Validar colecciones permitidas
+
+export const coleccionesPermitidas = (coleccion = "", colecciones = []) => {
+  const includes = colecciones.includes(coleccion);
+
+  if (!includes) {
+    throw new Error(
+      `La coleccion ${coleccion} no es permitida, ${colecciones}`
+    );
+  }
+
+  return true;
+};
